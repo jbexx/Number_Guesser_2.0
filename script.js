@@ -1,38 +1,66 @@
+//+++++++damn global variable++++++++
+
+var ranNum
+
 //+++++++++functions++++++++++
 
 //==========display user guess==========
 
-function enableEnter() {
-  $('#guessbtn').attr('disabled', $('#inptbx').val() === "");
+function enableBtns() {
+  $('#guessbtn').prop('disabled', $('#inptbx').val() === '');
+  $('#clrbtn').prop('disabled', $('#inptbx').val() === '');
 };
 
 function userGuess() {
   $('#num-output').text($('#inptbx').val());
 };
 
-
+function randomNumber() {
+  ranNum = Math.floor(Math.random() * (100 - 1 + 1)) + 1;
+  console.log('Random Number: ' + ranNum);
+};
 
 function enterClick() {
   userGuess();
+  compareNumbers();
+  clearClick();
+  enableBtns();
 };
-
-
 
 function clearClick() {
-
+  $('#inptbx').val('');
+  enableBtns();
 };
 
+function compareNumbers() {
+  var parsedNum = parseInt($('#inptbx').val(), 10);
+  console.log(parsedNum);
+  if (parsedNum > ranNum) {
+    $('#your-guess').text('Your last guess was:')
+    $('#fdbck').text("that's too high")
+  } else if (parsedNum < ranNum) {
+    $('#your-guess').text('Your last guess was:')
+    $('#fdbck').text("that's too low")
+  } else if (parsedNum === ranNum) {
+    $('#your-guess').text('')
+    $('#num-output').text('BOOM!')
+    $('#fdbck').text('')
+  }
+
+};
 
 
 
 
 //++++++++Event Listeners++++++++
 
+$(document).ready(randomNumber());
+
 $('#guessbtn').on('click', enterClick);
 
 $('#clrbtn').on('click', clearClick);
 
-$('#inptbx').on('keyup', enableEnter);
+$('#inptbx').on('keyup', enableBtns);
 
 
 // //===========store things in variables===========
