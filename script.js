@@ -1,36 +1,38 @@
+//+++++++++functions++++++++++
+
+//==========display user guess==========
+
+function enableEnter() {
+  $('#guessbtn').attr('disabled', $('#inptbx').val() === "");
+};
+
+function userGuess() {
+  $('#num-output').text($('#inptbx').val());
+};
+
+
+
+function enterClick() {
+  userGuess();
+};
+
+
+
+function clearClick() {
+
+};
 
 
 
 
 
+//++++++++Event Listeners++++++++
 
+$('#guessbtn').on('click', enterClick);
 
+$('#clrbtn').on('click', clearClick);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+$('#inptbx').on('keyup', enableEnter);
 
 
 // //===========store things in variables===========
