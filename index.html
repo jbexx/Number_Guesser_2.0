@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Number Guesser</title>
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+      <h1>Number<span class="thin-letters">Guesser</span></h1>
+    </header>
+
+    <section>
+      <!-- <article class="min-max">
+        <input id="min-range" type="number" placeholder="min">
+        <input id="max-range" type="number" placeholder="max">
+        <button id="param-btn" type="button" name="setparams">Set Parameters</button>
+      </article> -->
+
+      <article class="get-input">
+        <input id="inptbx" type="number" name="numberguess" placeholder="Enter your guess">
+        <button id="guessbtn" type="button" name="guessbtn" disabled>Guess</button>
+        <button id="clrbtn" type="button" name="clrbtn" disabled>Clear</button>
+      </article>
+
+      <article class="give-feedback">
+        <p id="your-guess">Feelin' lucky punk?</p>
+        <h2 id="num-output">1-100</h2>
+        <p id="fdbck">Make your best guess...</p>
+      </article>
+
+      <article class="reset">
+        <button id="resetbtn" type="reset" name="button">Reset</button>
+      </article>
+    </section>
+
+    <script type="text/javascript" src="./script.js"></script>
+
+  </body>
+</html>
