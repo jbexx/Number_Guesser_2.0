@@ -10,7 +10,7 @@ var max = $('#max-range').val();
 
 
 function resetFields() {
-  $('#inptbx').val('');
+  // $('#inptbx').val('');
   $('#your-guess').text("Feelin' lucky punk?");
   $('#num-output').text($('#min-range').val() + '-' + $('#max-range').val());
   $('#fdbck').text('Make your best guess...');
@@ -64,8 +64,10 @@ function restrictInput() {
     $('#guessbtn').prop('disabled', true);
     $('#clrbtn').prop('disabled', true);
     errorMsg();
-    setTimeout(resetFields, 2500);
-  };
+    // setTimeout(resetFields, 2500);
+  } else {
+    resetFields();
+  }
 };
 
 function errorMsg() {
@@ -104,6 +106,7 @@ function resetAll() {
   $('#fdbck').text('Make your best guess...');
   $('#min-range').val('1');
   $('#max-range').val('100');
+  randomNumber(1, 100);
 }
 
 function clearClick() {
@@ -119,7 +122,7 @@ function zeroState() {
 
 function keyUp() {
   enableBtns();
-  setTimeout(restrictInput, 1000);
+  restrictInput();
 };
 
 function enterClick() {
