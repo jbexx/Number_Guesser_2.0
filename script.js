@@ -6,6 +6,24 @@ var ranNum
 
 //==========display user guess==========
 
+function zeroState() {
+  resetFields();
+  randomNumber();
+  enableBtns();
+};
+
+function keyUp() {
+  restrictInput();
+  enableBtns();
+}
+
+function resetFields() {
+  $('#inptbx').val('');
+  $('#your-guess').text("Feelin' lucky punk?");
+  $('#num-output').text('1-100');
+  $('#fdbck').text('Make your best guess...');
+};
+
 function enableBtns() {
   $('#guessbtn').prop('disabled', $('#inptbx').val() === '');
   $('#clrbtn').prop('disabled', $('#inptbx').val() === '');
@@ -46,6 +64,17 @@ function compareNumbers() {
     $('#num-output').text('BOOM!')
     $('#fdbck').text('')
   }
+};
+
+function restrictInput() {
+  var parsedNum = parseInt($('#inptbx').val(), 10);
+  if (parsedNum > 100 || parsedNum < 1) {
+    $('#inptbx').val('');
+    $('#num-output').text('ERROR');
+    $('#your-guess').text('stay above 0');
+    $('#fdbck').text('stay under 101');
+    setTimeout(resetFields, 2500);
+  }
 
 };
 
@@ -60,7 +89,9 @@ $('#guessbtn').on('click', enterClick);
 
 $('#clrbtn').on('click', clearClick);
 
-$('#inptbx').on('keyup', enableBtns);
+$('#inptbx').on('keyup', keyUp);
+
+$('#resetbtn').on('click', zeroState);
 
 
 // //===========store things in variables===========
