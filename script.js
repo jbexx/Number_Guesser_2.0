@@ -2,18 +2,11 @@
 
 var ranNum
 
-var min = $('#min-range').val();
-var max = $('#max-range').val();
-
-
 //+++++++++functions++++++++++
 
-
-function resetFields() {
-  // $('#inptbx').val('');
-  $('#your-guess').text("Feelin' lucky punk?");
-  $('#num-output').text($('#min-range').val() + '-' + $('#max-range').val());
-  $('#fdbck').text('Make your best guess...');
+function randomNumber(min, max) {
+  ranNum = Math.floor(Math.random() * (max - min + 1)) + min;
+  console.log('Random Number: ' + ranNum);
 };
 
 function enableBtns() {
@@ -25,9 +18,27 @@ function userGuess() {
   $('#num-output').text($('#inptbx').val());
 };
 
-function randomNumber(min, max) {
-  ranNum = Math.floor(Math.random() * (max - min + 1)) + min;
-  console.log('Random Number: ' + ranNum);
+function resetFields() {
+  $('#your-guess').text("Feelin' lucky punk?");
+  $('#num-output').text($('#min-range').val() + ' - ' + $('#max-range').val());
+  $('#fdbck').text('Make your best guess...');
+};
+
+function errorMsg() {
+  var min = parseInt($('#min-range').val());
+  var max = parseInt($('#max-range').val());
+  $('#num-output').text('ERROR');
+  $('#your-guess').text('stay above ' + min);
+  $('#fdbck').text('stay under ' + max);
+};
+
+function newPhase() {
+  var min = parseInt($('#min-range').val()) - 10;
+  var max = parseInt($('#max-range').val()) + 10;
+  $('#min-range').val(min);
+  $('#max-range').val(max);
+  resetFields();
+  randomNumber(min, max);
 };
 
 function compareNumbers() {
@@ -47,15 +58,6 @@ function compareNumbers() {
   }
 };
 
-function newPhase() {
-  var min = parseInt($('#min-range').val()) - 10;
-  var max = parseInt($('#max-range').val()) + 10;
-  $('#min-range').val(min);
-  $('#max-range').val(max);
-  resetFields();
-  randomNumber(min, max);
-};
-
 function restrictInput() {
   var min = parseInt($('#min-range').val());
   var max = parseInt($('#max-range').val());
@@ -64,19 +66,26 @@ function restrictInput() {
     $('#guessbtn').prop('disabled', true);
     $('#clrbtn').prop('disabled', true);
     errorMsg();
-    // setTimeout(resetFields, 2500);
   } else {
     resetFields();
   }
 };
 
-function errorMsg() {
-  var min = parseInt($('#min-range').val());
-  var max = parseInt($('#max-range').val());
-  $('#num-output').text('ERROR');
-  $('#your-guess').text('stay above ' + min);
-  $('#fdbck').text('stay under ' + max);
-};
+// function minRange() {
+//   if ($('#min-range').val() === ''){
+//     $('#min-range').val('1')
+//   } else {
+//     $('#min-range').val()
+//   }
+// };
+
+// function maxRange() {
+//   if ($('#max-range').val() === ''){
+//     $('#max-range').val('100')
+//   } else {
+//     $('#max-range').val()
+//   }
+// };
 
 function paramSet() {
   if ($('#min-range').val() === ''){
@@ -85,18 +94,15 @@ function paramSet() {
     $('#min-range').val()
   }
   var min = parseInt($('#min-range').val());
-
   if ($('#max-range').val() === ''){
     $('#max-range').val('100')
   } else {
     $('#max-range').val()
   }
   var max = parseInt($('#max-range').val());
-
-  $('#num-output').text(min + '-' + max);
+  console.log(max);
+  $('#num-output').text(min + ' - ' + max);
   randomNumber(min, max);
-  console.log('min is: ' + min);
-  console.log('max is: ' + max);
 };
 
 function resetAll() {
